@@ -2,9 +2,11 @@ public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
 public int score = 0;
+Timer timer = new Timer();
 
 public void setup() {
   size(600,600);
+  frameRate(60);
   //System.out.println(); //97,122
 }
 
@@ -17,6 +19,7 @@ public void draw() {
   textFont(f); fill(g); textSize(30); textAlign(CENTER,CENTER); text("Press the letter above to start!",width/2,height/2+100);/*start text*/
   fill(255); strokeWeight(7); rect(width/2-40,height/2-40,80,80,7);/*key rectangle*/
   textFont(f); fill(0); textSize(30); textAlign(LEFT,TOP); text("Score: "+score,30,30);/*score*/
+  timer.draw(f);/*timer*/
   textFont(f); fill(0); textSize(50); textAlign(CENTER,CENTER); text(rKey,width/2,height/2);/*key*/
 }
 
