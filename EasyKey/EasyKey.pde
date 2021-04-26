@@ -51,6 +51,7 @@ public void keyPressed() {
       rKey = rKey();
     }
     else {
+      timer.timerActive = true;
       rKey = rKey();
       c = #CE3A3D;
       g = #CE3A3D;
@@ -58,7 +59,9 @@ public void keyPressed() {
     }
   }
   else {
-    //System.out.println(key);
-    
+    //System.out.println(keyCode);
+    if(keyCode == 32) {
+      resetEverything();
+    }
   }
 }

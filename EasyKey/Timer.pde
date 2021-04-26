@@ -1,7 +1,7 @@
 public class Timer {
   public boolean timerActive;
   public boolean roundEnd = false;
-  public int time = 0;
+  public int time;
   
   public Timer() {
     this.timerActive = false;
@@ -23,7 +23,7 @@ public class Timer {
   
   public void resetTimer() {
     timerActive = false;
-    time = 0;
+    time = 30;
     roundEnd = false;
   }
 }
