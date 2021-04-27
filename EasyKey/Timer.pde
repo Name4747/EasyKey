@@ -5,7 +5,7 @@ public class Timer {
   
   public Timer() {
     this.timerActive = false;
-    this.time = 10;
+    this.time = 30;
   }
   
   public void draw(PFont f) {
@@ -23,7 +23,7 @@ public class Timer {
   
   public void resetTimer() {
     timerActive = false;
-    time = 10;
+    time = 30;
     roundEnd = false;
   }
 }
