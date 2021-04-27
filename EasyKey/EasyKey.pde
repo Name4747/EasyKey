@@ -1,7 +1,7 @@
 public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
-public int score = 0;
+public int right = 0;
 public int wrong = 0;
 Timer timer = new Timer();
 
@@ -16,15 +16,16 @@ public void draw() {
     background(c);
     textFont(f); fill(g); textSize(30); textAlign(CENTER,CENTER); text("Press the letter above to start!",width/2,height/2+100);/*start text*/
     fill(255); strokeWeight(7); rect(width/2-40,height/2-40,80,80,7);/*key rectangle*/
-    textFont(f); fill(0); textSize(30); textAlign(LEFT,TOP); text("Score: "+score,30,30);/*score*/
+    textFont(f); fill(0); textSize(30); textAlign(LEFT,TOP); text("Score: "+(right-wrong)*100,30,30);/*score*/
     timer.draw(f);/*timer*/
     textFont(f); fill(0); textSize(50); textAlign(CENTER,CENTER); text(rKey,width/2,height/2);/*key*/
   }
   else{
     background(255);
     textFont(f); fill(0); textSize(30); textAlign(CENTER,CENTER); text("Press the SPACE to continue!",width/2,height/2+100);/*press key*/
-    textFont(f); fill(0); textSize(30); textAlign(CENTER,CENTER); text("Correct Keys: "+score,width/2,height/2-40);/*score*/
-    textFont(f); fill(0); textSize(30); textAlign(CENTER,CENTER); text("Incorrect Keys: "+wrong,width/2,height/2);/*wrong*/
+    textFont(f); fill(0); textSize(30); textAlign(CENTER,CENTER); text("Final Score: "+(right-wrong)*100,width/2,height/2-30);/*final score*/
+    //textFont(f); fill(0); textSize(30); textAlign(CENTER,CENTER); text("Correct Keys: "+right,width/2,height/2-40);/*right*/
+    //textFont(f); fill(0); textSize(30); textAlign(CENTER,CENTER); text("Incorrect Keys: "+wrong,width/2,height/2);/*wrong*/
   }
 }
 
@@ -36,7 +37,7 @@ public char rKey() {
 public void resetEverything() {
   c = #FFFFFF;
   g = #000000;
-  score = 0;
+  right = 0;
   wrong = 0;
   timer.resetTimer();
 }
@@ -47,7 +48,7 @@ public void keyPressed() {
       timer.timerActive = true;
       c = #1DA00D;
       g = #1DA00D;
-      score++;
+      right++;
       rKey = rKey();
     }
     else {
