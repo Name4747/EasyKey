@@ -1,5 +1,3 @@
-public PFont f = loadFont("CooperBlack.vlw");
-
 public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
@@ -15,6 +13,7 @@ public void setup() {
 }
 
 public void draw() {
+  PFont f = loadFont("CooperBlack.vlw");
   if (timer.roundEnd == false) {
     background(c);
     textFont(f); fill(g); textSize(30); textAlign(CENTER,CENTER); text("Press the letter above to start!",width/2,height/2+100);/*start text*/
