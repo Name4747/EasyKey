@@ -1,3 +1,4 @@
+JSONObject json;
 public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
@@ -17,6 +18,9 @@ Text isHighScore = new Text();
 public void setup() {
   size(600, 600);
   frameRate(60);
+  json = loadJSONObject("data.json");
+  bestScore = json.getInt("bestScore");
+  
 }
 
 public void draw() {
@@ -47,6 +51,8 @@ public char rKey() {
 
 public boolean isBestScore(int score, int bestScore) {
   if (score > bestScore) {
+    json.setInt("bestScore", score);
+    saveJSONObject(json, "data/data.json");
     return true;
   }
   return false;
