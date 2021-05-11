@@ -66,22 +66,34 @@ public void resetEverything() {
   timer.resetTimer();
 }
 
+public void resetJSON() {
+  bestScore = 0;
+  json.setInt("bestScore",0);
+  saveJSONObject(json, "data/data.json");
+}
+
 public void keyPressed() {
   if (timer.roundEnd == false) {
-    if (key == rKey) {
+    if (key == rKey) { 
       timer.timerActive = true;
       c = #1DA00D;
       g = #1DA00D;
       right++;
       rKey = rKey();
-    } else {
+    } 
+    else if(keyCode == 109){
+      //System.out.println(14);
+      resetJSON();
+    }
+    else {
       timer.timerActive = true;
       rKey = rKey();
       c = #CE3A3D;
       g = #CE3A3D;
       wrong++;
     }
-  } else {
+  } 
+  else {
     //System.out.println(keyCode);
     if (keyCode == 32) {
       if (isBestScore((right-wrong)*100, bestScore)) {
