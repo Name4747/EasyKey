@@ -4,24 +4,20 @@ public color c = #FFFFFF;
 public color g = #000000;
 public int right = 0;
 public int wrong = 0;
-public int bestScore;
 
 Timer timer = new Timer();
-Text start = new Text();
+//Text start = new Text();
 Text score = new Text();
-Text best = new Text();
 Text keyText = new Text();
 Text press = new Text();
 Text fscore = new Text();
 Text isHighScore = new Text();
+LeaderBoard leaderBoard = new LeaderBoard();
 
 public void setup() {
   size(600, 600);
   frameRate(60);
   json = loadJSONObject("data.json");
-  
-  int id = json.getInt("id");
-  System.out.println(id);
 }
 
 public void draw() {
@@ -29,20 +25,16 @@ public void draw() {
   if (timer.roundEnd == false) {
     background(c); 
     fill(255); strokeWeight(7); rect(width/2-40, height/2-40, 80, 80, 7);//key rectangle
-    
-    /*start text*/start.draw("Press the letter above to start!", width/2, height/2+100, 30, f, g, CENTER, CENTER);
+    leaderBoard.draw(f, g);
+    ///*start text*/start.draw("Press the letter above to start!", width/2, height/2+100, 30, f, g, CENTER, CENTER);
     /*score*/score.draw("Score: "+(right-wrong)*100, 30, 30, 30, f, 0, LEFT, TOP);
-    /*best score*/best.draw("Best Score: "+bestScore, 30, height-60, 30, f, 0, LEFT, TOP);
     /*timer*/timer.draw(f);
     /*key text*/keyText.draw(str(rKey), width/2, height/2, 50, f, 0, CENTER, CENTER);
   } else {
     background(255);
     /*press key*/press.draw("Press the SPACE to continue!", width/2, height/2+100, 30, f, 0, CENTER, CENTER);
     /*final score*/fscore.draw("Final Score: "+(right-wrong)*100, width/2, height/2-30, 30, f, 0, CENTER, CENTER);
-    if (isBestScore((right-wrong)*100, bestScore)) {
-      /*high score*/isHighScore.draw("You beat the high score!", width/2, height/2+35, 30, f, 0, CENTER, CENTER);
     }
-  }
 }
 
 public char rKey() {
@@ -50,12 +42,6 @@ public char rKey() {
   return c;
 }
 
-public boolean isBestScore(int score, int bestScore) {
-  if (score > bestScore) {
-    return true;
-  }
-  return false;
-}
 
 public void resetEverything() {
   c = #FFFFFF;
@@ -65,27 +51,35 @@ public void resetEverything() {
   timer.resetTimer();
 }
 
+public void resetJSON() {
+  saveJSONObject(json, "data/data.json");
+}
+
 public void keyPressed() {
   if (timer.roundEnd == false) {
-    if (key == rKey) {
+    if (key == rKey) { 
       timer.timerActive = true;
       c = #1DA00D;
       g = #1DA00D;
       right++;
       rKey = rKey();
-    } else {
+    } 
+    else if(keyCode == 109){
+      //System.out.println(14);
+      resetJSON();
+    }
+    else {
       timer.timerActive = true;
       rKey = rKey();
       c = #CE3A3D;
       g = #CE3A3D;
       wrong++;
     }
-  } else {
+  } 
+  else {
     //System.out.println(keyCode);
     if (keyCode == 32) {
-      if (isBestScore((right-wrong)*100, bestScore)) {
-        bestScore = (right-wrong)*100;
-      }
+      
       resetEverything();
     }
   }

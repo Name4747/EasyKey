@@ -2,10 +2,11 @@ public class Timer {
   public boolean timerActive;
   public boolean roundEnd = false;
   public int time;
+  public int timeLength = 30;
   
   public Timer() {
     this.timerActive = false;
-    this.time = 30;
+    this.time = timeLength;
   }
   
   public void draw(PFont f) {
@@ -23,7 +24,7 @@ public class Timer {
   
   public void resetTimer() {
     timerActive = false;
-    time = 30;
+    time = timeLength;
     roundEnd = false;
   }
 }
