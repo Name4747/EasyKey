@@ -1,5 +1,5 @@
 public class LeaderBoard {
-  public int[] arr = {10,9,8,7,6,5,4,3,2,1};
+  public int[] arr = {1300,500,300,200,100,0,0,0,0,0};
   public int x = 30;
   public int y = 140;
   Text text = new Text();
@@ -12,13 +12,18 @@ public class LeaderBoard {
     }
   }
   
-  public int determinePosition(int score) {
+  public void addScore(int score) {
     for (int j = 0; j < arr.length; j++) {
       if(score > arr[j]) {
-        return j;
+        int temp;
+        temp = arr[j];
+        for(int h = j; h < arr.length; h++){
+          arr[h+1] = temp;
+        }
+        arr[j] = score;
+        break;
       }
     }
-    return 0;
   }
   
 }

@@ -18,6 +18,7 @@ public void setup() {
   size(600, 600);
   frameRate(60);
   json = loadJSONObject("data.json");
+  leaderBoard.addScore(400);
 }
 
 public void draw() {
