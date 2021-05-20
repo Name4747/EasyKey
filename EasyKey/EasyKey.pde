@@ -1,6 +1,6 @@
 JSONObject json;
-public char[] recent = {char(97),char(97),char(97)};
-int n = 0;
+public String[] recent = {"_","_","_"};
+public int n = 0;
 public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
@@ -14,7 +14,7 @@ Text keyText = new Text();
 Text press = new Text();
 Text fscore = new Text();
 Text isHighScore = new Text();
-Text name = new Text();
+Text namePrint = new Text();
 LeaderBoard leaderBoard = new LeaderBoard();
 
 public void setup() {
@@ -38,7 +38,7 @@ public void draw() {
     background(255);
     /*press key*/press.draw("Press the SPACE to continue!", width/2, height/2+100, 30, f, 0, CENTER, CENTER);
     /*final score*/fscore.draw("Final Score: "+(right-wrong)*100, width/2, height/2-30, 30, f, 0, CENTER, CENTER);
-    /*name*/name.draw(str(recent[0])+str(recent[1])+str(recent[2]) ,width/2 ,height/2+35 ,40 ,f ,0 ,CENTER, CENTER);
+    /*name*/namePrint.draw(recent[0]+recent[1]+recent[2],width/2 ,height/2+35 ,40 ,f ,0 ,CENTER, CENTER);
   }
 }
 
@@ -57,12 +57,14 @@ public void resetEverything() {
 }
 
 public void resetJSON() {
+  //set variables to zero here
   saveJSONObject(json, "data/data.json");
 }
 
 public void keyPressed() {
   
   if (timer.roundEnd == false) {
+    //startscreen
     if (key == rKey) { 
       timer.timerActive = true;
       c = #1DA00D;
@@ -72,7 +74,6 @@ public void keyPressed() {
     } 
     
     else if(keyCode == 109){
-      //System.out.println(14);
       resetJSON();
     }
     else {
@@ -84,18 +85,22 @@ public void keyPressed() {
     }
   } 
   else {
-    //System.out.println(keyCode);
-    if (n < 3 && key != 43) {
-      recent[n] = char(key);
+    //endscreen
+    if (n < 3 && key != 43 && key != 8) {
+      recent[n] = str(key);
       n++;
     }
-  
-    if(keyCode == 107) {
-      for(char u : recent) {
-      println(u);
-      }  
-    }
     
+    else if(keyCode == 8 && n > 0) {
+      for(int i = 2; i >= 0; i--) {
+        if(recent[i] != "_") {
+          recent[i] = "_";
+          break;
+        }
+      }
+      n--;
+    }
+  
     if (keyCode == 32) {
       
       resetEverything();
