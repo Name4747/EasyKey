@@ -1,6 +1,7 @@
 JSONObject json;
 public String[] recent = {"_","_","_"};
 public int n = 0;
+public String name = "";
 public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
@@ -8,13 +9,14 @@ public int right = 0;
 public int wrong = 0;
 
 Timer timer = new Timer();
-//Text start = new Text();
+Text start = new Text();
 Text score = new Text();
 Text keyText = new Text();
 Text press = new Text();
 Text fscore = new Text();
 Text isHighScore = new Text();
 Text namePrint = new Text();
+Text typeName = new Text();
 LeaderBoard leaderBoard = new LeaderBoard();
 
 public void setup() {
@@ -29,7 +31,7 @@ public void draw() {
     background(c); 
     fill(255); strokeWeight(7); rect(width/2-40, height/2-40, 80, 80, 7);//key rectangle
     leaderBoard.draw(f, g);
-    ///*start text*/start.draw("Press the letter above to start!", width/2, height/2+100, 30, f, g, CENTER, CENTER);
+    /*start text*/start.draw("Press the letter above to start!", width/2, height/2+70, 20, f, g, CENTER, CENTER);
     /*score*/score.draw("Score: "+(right-wrong)*100, 30, 30, 30, f, 0, LEFT, TOP);
     /*timer*/timer.draw(f, leaderBoard);
     /*key text*/keyText.draw(str(rKey), width/2, height/2, 50, f, 0, CENTER, CENTER);
@@ -37,8 +39,9 @@ public void draw() {
   else {
     background(255);
     /*press key*/press.draw("Press the SPACE to continue!", width/2, height/2+100, 30, f, 0, CENTER, CENTER);
-    /*final score*/fscore.draw("Final Score: "+(right-wrong)*100, width/2, height/2-30, 30, f, 0, CENTER, CENTER);
-    /*name*/namePrint.draw(recent[0]+recent[1]+recent[2],width/2 ,height/2+35 ,40 ,f ,0 ,CENTER, CENTER);
+    /*final score*/fscore.draw("Final Score: "+(right-wrong)*100, width/2, height/2-50, 30, f, 0, CENTER, CENTER);
+    /*type name*/typeName.draw("Type name here!", width/2, height/2, 30, f, 0, CENTER, CENTER);
+    /*name*/namePrint.draw(recent[0]+recent[1]+recent[2],width/2 ,height/2+45 ,40 ,f ,0 ,CENTER, CENTER);
   }
 }
 
@@ -47,12 +50,19 @@ public char rKey() {
   return c;
 }
 
-
 public void resetEverything() {
   c = #FFFFFF;
   g = #000000;
   right = 0;
   wrong = 0;
+  name = "";
+  for(String f : recent) {
+    name += f;
+  }
+  n = 0;
+  recent[0] = "_";
+  recent[1] = "_";
+  recent[2] = "_";
   timer.resetTimer();
 }
 
@@ -74,7 +84,8 @@ public void keyPressed() {
     } 
     
     else if(keyCode == 109){
-      resetJSON();
+      println(name);
+      //resetJSON();
     }
     else {
       timer.timerActive = true;
@@ -86,11 +97,12 @@ public void keyPressed() {
   } 
   else {
     //endscreen
-    if (n < 3 && key != 43 && key != 8) {
-      recent[n] = str(key);
-      n++;
+    if(int(key) >= 97 && int(key) <= 122) {
+      if (n < 3 && key != 43 && key != 8) {
+        recent[n] = str(key);
+        n++;
+      }
     }
-    
     else if(keyCode == 8 && n > 0) {
       for(int i = 2; i >= 0; i--) {
         if(recent[i] != "_") {

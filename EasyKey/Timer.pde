@@ -13,9 +13,9 @@ public class Timer {
     textFont(f); fill(0); textSize(30); textAlign(LEFT,TOP); text("Timer: "+time,405,30);/*timer*/
     if(timerActive) {
       if(time == 0) {
-        leaderBoard.addScore((right-wrong)*100);
         timerActive = false;
         roundEnd = true;
+        leaderBoard.addScore((right-wrong)*100);
       }
       else if((frameCount % 60) == 0) {
         time--;
