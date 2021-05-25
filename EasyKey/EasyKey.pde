@@ -1,4 +1,4 @@
-JSONObject json;
+//JSONArray json;
 public String[] recent = {"_","_","_"};
 public int n = 0;
 public String name = "";
@@ -22,7 +22,7 @@ LeaderBoard leaderBoard = new LeaderBoard();
 public void setup() {
   size(600, 600);
   frameRate(60);
-  json = loadJSONObject("data.json");
+  //json = loadJSONArray("data.json");
   leaderBoard.setup();
 }
 
@@ -66,7 +66,7 @@ public void resetEverything() {
 
 public void resetJSON() {
   //set variables to zero here
-  saveJSONObject(json, "data/data.json");
+  //saveJSONArray(json, "data/data.json");
 }
 
 public void keyPressed() {
@@ -113,7 +113,12 @@ public void keyPressed() {
   
     if (keyCode == 32) {
       for(String f : recent) {
-        name += f;
+        if(f == "_") {
+          name += "a";
+        }
+        else {
+          name += f;
+        }
       }
       leaderBoard.addScore((right-wrong)*100, name);
       resetEverything();
