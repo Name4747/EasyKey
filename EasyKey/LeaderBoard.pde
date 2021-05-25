@@ -6,8 +6,10 @@ public class LeaderBoard {
   Text nums = new Text();
   
   public void setup() {
-    for(int i = 0; i < arr.length; i++){
-      arr[i] = new Score(0, "aaa");
+    for(int i = 0; i < arr.length; i++) {
+      JSONObject obj = json.getJSONObject(i);
+      Score scr = new Score(obj.getInt("score"), obj.getString("name"));
+      arr[i] = scr;
     }
   }
   
@@ -16,6 +18,15 @@ public class LeaderBoard {
     for(int i = 0; i < 10; i++) {
       nums.draw((i+1)+". "+arr[i].name+" "+arr[i].score, x, y+(i*40), 20, f, c, LEFT, TOP);
     }
+  }
+  
+  public void saveJSON() {
+    for(int i = 0; i < arr.length; i++) {
+      JSONObject obj = json.getJSONObject(i);
+      obj.setInt("score",arr[i].score);
+      obj.setString("name",arr[i].name);
+    }
+    saveJSONArray(json, "data/data.json");
   }
   
   public void addScore(int score, String name) {
