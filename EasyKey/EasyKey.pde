@@ -32,7 +32,7 @@ public void draw() {
     background(c); 
     fill(255); strokeWeight(7); rect(width/2-40, height/2-40, 80, 80, 7);//key rectangle
     leaderBoard.draw(f, g);
-    ///*start text*/start.draw("Press the letter above to start!", width/2, height/2+70, 20, f, g, CENTER, CENTER);
+    /*start text*/start.draw("Press the letter in the center to start!", width/2, height-35, 25, f, g, CENTER, CENTER);
     /*score*/score.draw("Score: "+(right-wrong)*100, 30, 30, 30, f, 0, LEFT, TOP);
     /*timer*/timer.draw(f, leaderBoard);
     /*key text*/keyText.draw(str(rKey), width/2, height/2, 50, f, 0, CENTER, CENTER);
@@ -67,6 +67,11 @@ public void resetEverything() {
 public void resetJSON() {
   for(int i = 0; i < 10; i++) {
       JSONObject obj = json.getJSONObject(i);
+      if(i == 0) {
+        obj.setInt("score",7000);
+        obj.setString("name","dev");
+        continue;
+      }
       obj.setInt("score",0);
       obj.setString("name","aaa");
     }
@@ -122,6 +127,9 @@ public void keyPressed() {
         else {
           name += f;
         }
+      }
+      if(name.equals("dev")) {
+        name = "not";
       }
       leaderBoard.addScore((right-wrong)*100, name);
       leaderBoard.saveJSON();
