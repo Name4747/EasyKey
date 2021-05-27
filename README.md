@@ -10,4 +10,4 @@ Are you a faster typer than your friends?
 
 Press NumPad minus to reset JSON
 
-<img src="./">
+<img src="./images/end-screen.png">
