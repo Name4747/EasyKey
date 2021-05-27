@@ -5,8 +5,8 @@ public String name = "";
 public char rKey = rKey();
 public color c = #FFFFFF;
 public color g = #000000;
-public int right = 0;
-public int wrong = 0;
+public double right = 0;
+public double wrong = 0;
 
 Timer timer = new Timer();
 Text start = new Text();
@@ -33,14 +33,14 @@ public void draw() {
     fill(255); strokeWeight(7); rect(width/2-40, height/2-40, 80, 80, 7);//key rectangle
     leaderBoard.draw(f, g);
     /*start text*/start.draw("Press the letter in the center to start!", width/2, height-35, 25, f, g, CENTER, CENTER);
-    /*score*/score.draw("Score: "+(right-wrong)*100, 30, 30, 30, f, 0, LEFT, TOP);
+    /*score*/score.draw("Score: "+(int)((right-wrong)*100), 30, 30, 30, f, 0, LEFT, TOP);
     /*timer*/timer.draw(f, leaderBoard);
     /*key text*/keyText.draw(str(rKey), width/2, height/2, 50, f, 0, CENTER, CENTER);
   } 
   else {
     background(255);
     /*press key*/press.draw("Press the SPACE to continue!", width/2, height/2+100, 30, f, 0, CENTER, CENTER);
-    /*final score*/fscore.draw("Final Score: "+(right-wrong)*100, width/2, height/2-50, 30, f, 0, CENTER, CENTER);
+    /*final score*/fscore.draw("Final Score: "+(int)((right-wrong)*100), width/2, height/2-50, 30, f, 0, CENTER, CENTER);
     /*type name*/typeName.draw("Type name here!", width/2, height/2, 30, f, 0, CENTER, CENTER);
     /*name*/namePrint.draw(recent[0]+recent[1]+recent[2],width/2 ,height/2+45 ,40 ,f ,0 ,CENTER, CENTER);
   }
@@ -98,7 +98,7 @@ public void keyPressed() {
       rKey = rKey();
       c = #CE3A3D;
       g = #CE3A3D;
-      wrong++;
+      wrong += 0.5;
     }
   } 
   else {
@@ -131,7 +131,7 @@ public void keyPressed() {
       if(name.equals("dev")) {
         name = "not";
       }
-      leaderBoard.addScore((right-wrong)*100, name);
+      leaderBoard.addScore((int)((right-wrong)*100), name);
       leaderBoard.saveJSON();
       resetEverything();
     }

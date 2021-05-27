@@ -2,7 +2,7 @@ public class Timer {
   public boolean timerActive;
   public boolean roundEnd = false;
   public int time;
-  public int timeLength = 60;
+  public int timeLength = 10;
   
   public Timer() {
     this.timerActive = false;
