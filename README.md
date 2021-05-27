@@ -10,4 +10,7 @@ Are you a faster typer than your friends?
 
 Press NumPad minus to reset JSON
 
-<img src="./images/end-screen.png">
+<img src="./images/main-screen.PNG">
+<img src="./images/right-answer.PNG">
+<img src="./images/wrong-answer.PNG">
+<img src="./images/end-screen.PNG">
